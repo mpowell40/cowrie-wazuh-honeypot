@@ -84,10 +84,20 @@ When adversaries connect to the honeypot, Cowrie serves an interactive Debian sh
   <img src="screenshots/emulated-shell-session.png" alt="Emulated Debian Interactive Shell Session" width="100%" />
 </div>
 
+<div align="center">
+  <img src="screenshots/emulated-shell-session.png" alt="Emulated Debian Interactive Shell Session" width="100%" />
+</div>
+
+<div align="center">
+  <img src="screenshots/emulated_shell.png" alt="Emulated Debian Interactive Shell Session" width="100%" />
+</div>
+
 <p align="center">
   <em>Figure 4: Adversary terminal perspective showing emulated Debian environment and captured post-exploitation reconnaissance commands.</em>
 </p>
+
 ---
+
 
 ## 🎯 Step 4: MITRE ATT&CK Mapping & Defensive Visibility
 
