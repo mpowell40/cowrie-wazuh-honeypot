@@ -73,13 +73,20 @@ The Wazuh Agent node monitors and streams structured events directly from Cowrie
 When adversaries connect to the honeypot, Cowrie serves an interactive Debian shell while recording credentials, HASSH client fingerprints, session runtimes, and keyboard inputs in real time.
 
 <div align="center">
-  <img src="screenshots/Fake-Cowrie-Shell-logs.png" alt="Cowrie Interactive Command Log Capture" width="100%" />
+  <img src="screenshots/honeypot-session-log.png" alt="Cowrie Interactive Command Log Capture" width="100%" />
 </div>
 
 <p align="center">
   <em>Figure 3: Cowrie transport log capturing successful interactive shell access, pseudo-terminal (TTY) allocation, and automated post-exploitation command execution.</em>
 </p>
 
+<div align="center">
+  <img src="screenshots/emulated-shell-session.png" alt="Emulated Debian Interactive Shell Session" width="100%" />
+</div>
+
+<p align="center">
+  <em>Figure 4: Adversary terminal perspective showing emulated Debian environment and captured post-exploitation reconnaissance commands.</em>
+</p>
 ---
 
 ## 🎯 Step 4: MITRE ATT&CK Mapping & Defensive Visibility
@@ -91,7 +98,7 @@ Inbound security events were aligned with the MITRE ATT&CK Enterprise Matrix wit
 </div>
 
 <p align="center">
-  <em>Figure 4: Wazuh MITRE ATT&CK framework view mapping active alerts against adversary tactics and techniques.</em>
+  <em>Figure 5: Wazuh MITRE ATT&CK framework view mapping active alerts against adversary tactics and techniques.</em>
 </p>
 
 <div align="center">
@@ -99,7 +106,7 @@ Inbound security events were aligned with the MITRE ATT&CK Enterprise Matrix wit
 </div>
 
 <p align="center">
-  <em>Figure 5: Alert volume distribution categorized across Discovery, Defense Evasion, and Execution tactics.</em>
+  <em>Figure 6: Alert volume distribution categorized across Discovery, Defense Evasion, and Execution tactics.</em>
 </p>
 
 * **T1046 (Network Service Discovery):** Internet-wide port scanners sweeping public IPv4 ranges for active SSH daemons.
@@ -120,7 +127,7 @@ Automated scripts and interactive threat actors systematically executed profilin
 </div>
 
 <p align="center">
-  <em>Figure 6: Aggregated post-exploitation command frequency distribution generated in OpenSearch Dashboards.</em>
+  <em>Figure 7: Aggregated post-exploitation command frequency distribution generated in OpenSearch Dashboards.</em>
 </p>
 
 | Observed Command Payload | Frequency | Defensive Analysis & TTP Objective |
@@ -142,7 +149,7 @@ Telemetry ingested by the Wazuh SIEM is parsed into queryable schema fields, all
 </div>
 
 <p align="center">
-  <em>Figure 7: Wazuh Discover console displaying parsed log telemetry fields (`data.src_ip`, `data.username`, `data.password`) alongside correlated MITRE ATT&CK technique IDs.</em>
+  <em>Figure 8: Wazuh Discover console displaying parsed log telemetry fields (`data.src_ip`, `data.username`, `data.password`) alongside correlated MITRE ATT&CK technique IDs.</em>
 </p>
 
 * **Top Harvested Usernames:** `root`, `ubuntu`, `admin`, `guest`, `oracle`, `test2`, `hadoop`
