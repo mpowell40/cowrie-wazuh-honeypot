@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🛡️ Cloud Threat Deception & SIEM Telemetry Pipeline
+#  Cloud Threat Deception & SIEM Telemetry Pipeline
 ### **AWS EC2 • Cowrie SSH Honeypot • Wazuh SIEM/XDR • OpenSearch**
 
 <br />
