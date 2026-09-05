@@ -5,7 +5,7 @@
 
 <br />
 
-<img src="screenshots/World%20map%20of%20attack%20location%20.png" alt="Global Threat Origins Map" width="100%" />
+<img src="screenshots/Updated%20Attack%20Map%209-4-26.png" alt="Global Threat Origins Map" width="100%" />
 
 <br />
 <br />
