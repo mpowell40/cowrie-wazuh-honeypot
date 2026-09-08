@@ -143,7 +143,7 @@ Automated scripts and interactive threat actors systematically executed profilin
 
 ---
 
-### 🚨 Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events) 9-8-26
+### 🚨 **9/8/26 Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events)**
 
 During monitoring, the ingestion pipeline recorded a massive brute-force and canary execution surge originating from a centralized cluster in East China, yielding over **81,400+ hits** within a 12-hour operational window.
 
