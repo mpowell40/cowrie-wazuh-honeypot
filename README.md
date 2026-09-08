@@ -143,7 +143,7 @@ Automated scripts and interactive threat actors systematically executed profilin
 
 ---
 
-### 🚨 **9/8/26 Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events)**
+### 🚨 **9-8-26 Update - Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events)** 
 
 During monitoring, the ingestion pipeline recorded a massive brute-force and canary execution surge originating from a centralized cluster in East China, yielding over **81,400+ hits** within a 12-hour operational window.
 
@@ -155,11 +155,20 @@ During monitoring, the ingestion pipeline recorded a massive brute-force and can
   <em>Figure 9: OpenSearch coordinate map isolating an automated botnet surge responsible for >81,400 aggressive credential-stuffing and post-auth probe attempts.</em>
 </p>
 
-#### Payload Analysis: Hex-Encoded Canary Probes
-Following automated credential spraying against `root`, the attacking cluster repeatedly injected hexadecimal-encoded escape sequences:
+#### Multi-Stage Attack Flow: Dictionary Spraying to Hex-Encoded Canary Execution
 
+Telemetry during the surge revealed a coordinated, two-stage intrusion pipeline combining aggressive brute-force authentication with automated terminal validation:
 
-# echo -e "\x6F\x6B"
+1. **Dictionary Spraying (MITRE ATT&CK T1110):**
+   Prior to gaining access, the botnet launched systematic dictionary attacks. Automated engines sprayed extensive wordlists combining common administrative accounts (`Root`, `ubuntu`, `admin`) with arbitrary, randomized credentials (`bulldogs`, `buisson`, `	bretagne1`).
+
+2. **Automated Terminal Probe & Hex Canary (MITRE ATT&CK T1059 / T1027):**
+   Upon identifying valid credential pairs and establishing an interactive shell session, the attacking nodes bypassed manual reconnaissance and immediately injected hexadecimal-encoded escape sequences: 
+   
+   # echo -e "\x6F\x6B"
+
+  **In ASCII hexadecimal, `\x6F` represents the letter **"o"** and `\x6B` represents the letter **"k"**, meaning this command simply prints the word **"ok"**. Automated botnets run this lightweight "canary" test immediately after gaining access. If the shell responds with "ok", the script confirms that it is interacting with a functional terminal interpreter before attempting to download second-stage malware droppers via `curl` or `wget`.**
+
 
 
 
