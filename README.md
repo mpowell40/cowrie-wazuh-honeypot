@@ -143,6 +143,26 @@ Automated scripts and interactive threat actors systematically executed profilin
 
 ---
 
+### 🚨 Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events) 9-8-26
+
+During monitoring, the ingestion pipeline recorded a massive brute-force and canary execution surge originating from a centralized cluster in East China, yielding over **81,400+ hits** within a 12-hour operational window.
+
+<div align="center">
+  <img src="screenshots/china-botnet-attack-surge.png" alt="East Asia Concentrated Attack Surge" width="90%" />
+</div>
+
+<p align="center">
+  <em>Figure 9: OpenSearch coordinate map isolating an automated botnet surge responsible for >81,400 aggressive credential-stuffing and post-auth probe attempts.</em>
+</p>
+
+#### Payload Analysis: Hex-Encoded Canary Probes
+Following automated credential spraying against `root`, the attacking cluster repeatedly injected hexadecimal-encoded escape sequences:
+
+
+# echo -e "\x6F\x6B"
+
+
+
 ### Normalized SIEM Event Triage
 
 Telemetry ingested by the Wazuh SIEM is parsed into queryable schema fields, allowing analysts to filter, sort, and correlate malicious sessions by source IP, target ports, and credential pairs.
