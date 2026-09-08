@@ -141,6 +141,23 @@ Automated scripts and interactive threat actors systematically executed profilin
 | `uname -a` | **1.6% (5)** | Scripted system profile discovery. |
 | `cat /etc/passwd` | **1.0% (3)** | Local user account enumeration and credential discovery. |
 
+### Normalized SIEM Event Triage
+
+Telemetry ingested by the Wazuh SIEM is parsed into queryable schema fields, allowing analysts to filter, sort, and correlate malicious sessions by source IP, target ports, and credential pairs.
+
+<div align="center">
+  <img src="screenshots/Real%20Attacker%20data.png" alt="Wazuh SIEM Normalized Event Triage View" width="100%" />
+</div>
+
+<p align="center">
+  <em>Figure 8: Wazuh Discover console displaying parsed log telemetry fields (`data.src_ip`, `data.username`, `data.password`) alongside correlated MITRE ATT&CK technique IDs.</em>
+</p>
+
+* **Top Harvested Usernames:** `root`, `ubuntu`, `admin`, `guest`, `oracle`, `test2`, `hadoop`
+* **Top Harvested Passwords:** `root`, `admin`, `123456`, `ubuntu`, `rootroot`, `oracle123`, `test2`
+
+---
+
 ---
 
 ### 🚨 **9-8-26 Update - Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events)** 
@@ -171,27 +188,6 @@ Telemetry during the surge revealed a coordinated, two-stage intrusion pipeline 
 
 ---
 
-
-
-
-
-
-### Normalized SIEM Event Triage
-
-Telemetry ingested by the Wazuh SIEM is parsed into queryable schema fields, allowing analysts to filter, sort, and correlate malicious sessions by source IP, target ports, and credential pairs.
-
-<div align="center">
-  <img src="screenshots/Real%20Attacker%20data.png" alt="Wazuh SIEM Normalized Event Triage View" width="100%" />
-</div>
-
-<p align="center">
-  <em>Figure 8: Wazuh Discover console displaying parsed log telemetry fields (`data.src_ip`, `data.username`, `data.password`) alongside correlated MITRE ATT&CK technique IDs.</em>
-</p>
-
-* **Top Harvested Usernames:** `root`, `ubuntu`, `admin`, `guest`, `oracle`, `test2`, `hadoop`
-* **Top Harvested Passwords:** `root`, `admin`, `123456`, `ubuntu`, `rootroot`, `oracle123`, `test2`
-
----
 
 ## ⚙️ Custom Detection Rules (`local_rules.xml`)
 
