@@ -141,6 +141,21 @@ Automated scripts and interactive threat actors systematically executed profilin
 | `uname -a` | **1.6% (5)** | Scripted system profile discovery. |
 | `cat /etc/passwd` | **1.0% (3)** | Local user account enumeration and credential discovery. |
 
+### Normalized SIEM Event Triage
+
+Telemetry ingested by the Wazuh SIEM is parsed into queryable schema fields, allowing analysts to filter, sort, and correlate malicious sessions by source IP, target ports, and credential pairs.
+
+<div align="center">
+  <img src="screenshots/Real%20Attacker%20data.png" alt="Wazuh SIEM Normalized Event Triage View" width="100%" />
+</div>
+
+<p align="center">
+  <em>Figure 8: Wazuh Discover console displaying parsed log telemetry fields (`data.src_ip`, `data.username`, `data.password`) alongside correlated MITRE ATT&CK technique IDs.</em>
+</p>
+
+* **Top Harvested Usernames:** `root`, `ubuntu`, `admin`, `guest`, `oracle`, `test2`, `hadoop`
+* **Top Harvested Passwords:** `root`, `admin`, `123456`, `ubuntu`, `rootroot`, `oracle123`, `test2`
+
 ---
 
 ### 🚨 **9-8-26 Update - Threat Actor Case Study: High-Volume Botnet Surge (81,000+ Events)** 
@@ -159,35 +174,18 @@ During monitoring, the ingestion pipeline recorded a massive brute-force and can
 
 Telemetry during the surge revealed a coordinated, two-stage intrusion pipeline combining aggressive brute-force authentication with automated terminal validation:
 
-1. **Dictionary Spraying (MITRE ATT&CK T1110):**
-   Prior to gaining access, the botnet launched systematic dictionary attacks. Automated engines sprayed extensive wordlists combining common administrative accounts (`Root`, `ubuntu`, `admin`) with arbitrary, randomized credentials (`bulldogs`, `buisson`, `	bretagne1`).
+1. **Dictionary Spraying (MITRE ATT&CK T1110):**  
+   Prior to gaining access, the botnet launched systematic dictionary attacks. Automated engines sprayed extensive wordlists combining common administrative accounts (`root`, `ubuntu`, `admin`) with arbitrary, randomized credentials (`bulldogs`, `buisson`, `bretagne1`).
 
-2. **Automated Terminal Probe & Hex Canary (MITRE ATT&CK T1059 / T1027):**
-   Upon identifying valid credential pairs and establishing an interactive shell session, the attacking nodes bypassed manual reconnaissance and immediately injected hexadecimal-encoded escape sequences: 
-   
-   # echo -e "\x6F\x6B"
+2. **Automated Terminal Probe & Hex Canary (MITRE ATT&CK T1059 / T1027):**  
+   Upon identifying valid credential pairs and establishing an interactive shell session, the attacking nodes bypassed manual reconnaissance and immediately injected hexadecimal-encoded escape sequences:
 
-  **In ASCII hexadecimal, `\x6F` represents the letter **"o"** and `\x6B` represents the letter **"k"**, meaning this command simply prints the word **"ok"**. Automated botnets run this lightweight "canary" test immediately after gaining access. If the shell responds with "ok", the script confirms that it is interacting with a functional terminal interpreter before attempting to download second-stage malware droppers via `curl` or `wget`.**
+   <pre><code>echo -e "\x6F\x6B"</code></pre>
 
-
-
-
-### Normalized SIEM Event Triage
-
-Telemetry ingested by the Wazuh SIEM is parsed into queryable schema fields, allowing analysts to filter, sort, and correlate malicious sessions by source IP, target ports, and credential pairs.
-
-<div align="center">
-  <img src="screenshots/Real%20Attacker%20data.png" alt="Wazuh SIEM Normalized Event Triage View" width="100%" />
-</div>
-
-<p align="center">
-  <em>Figure 8: Wazuh Discover console displaying parsed log telemetry fields (`data.src_ip`, `data.username`, `data.password`) alongside correlated MITRE ATT&CK technique IDs.</em>
-</p>
-
-* **Top Harvested Usernames:** `root`, `ubuntu`, `admin`, `guest`, `oracle`, `test2`, `hadoop`
-* **Top Harvested Passwords:** `root`, `admin`, `123456`, `ubuntu`, `rootroot`, `oracle123`, `test2`
+   In ASCII hexadecimal, `\x6F` represents the letter **"o"** and `\x6B` represents the letter **"k"**, meaning this command simply prints the word **"ok"**. Automated botnets run this lightweight "canary" test immediately after gaining access. If the shell responds with "ok", the script confirms that it is interacting with a functional terminal interpreter before attempting to download second-stage malware droppers via `curl` or `wget`.
 
 ---
+
 
 ## ⚙️ Custom Detection Rules (`local_rules.xml`)
 
